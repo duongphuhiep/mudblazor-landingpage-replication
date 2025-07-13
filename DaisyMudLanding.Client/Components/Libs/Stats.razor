@@ -1,4 +1,4 @@
-@rendermode @(new InteractiveServerRenderMode(false))
+@rendermode InteractiveServer
 <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
     <div>
         <div class="text-5xl my-4 @_skeleton">@(StatsData?.Downloads ?? "???")</div>
@@ -38,9 +38,15 @@
 
     private string _skeleton => StatsData is null ? "skeleton text-transparent" : "text-primary";
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await base.OnInitializedAsync();
-        StatsData = await _statsService.GetStats(CancellationToken.None);
+        if (firstRender)
+        {
+            if (StatsData is null)
+            {
+                StatsData = await _statsService.GetStats(CancellationToken.None);
+                StateHasChanged();
+            }
+        }
     }
 }

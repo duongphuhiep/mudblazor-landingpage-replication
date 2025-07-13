@@ -1,4 +1,4 @@
-@rendermode @(new InteractiveServerRenderMode(false))
+@rendermode InteractiveServer
 <Dialog
     @ref="_dialog"
     class="modal modal-top scroll-0 [scrollbar-gutter:stable_both-edges]">
@@ -60,10 +60,16 @@
         await _dialog.ShowModal(_searchInput?.InputElement);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await base.OnInitializedAsync();
-        SearchResult = await _searchService.QuerySearchResultFromDatabase("", CancellationToken.None);
+        if (firstRender)
+        {
+            if (SearchResult is null)
+            {
+                SearchResult = await _searchService.QuerySearchResultFromDatabase("", CancellationToken.None);
+                StateHasChanged();
+            }
+        }
     }
 
     private async Task OnValueChanged(string arg)

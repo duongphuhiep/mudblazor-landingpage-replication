@@ -1,31 +1,21 @@
 @page "/tryserver"
 @rendermode InteractiveServer
 
-<h1>InteractiveServer</h1>
-
-<h1>DebouncedServerInput Test</h1>
-<p>
-    <DebouncedInput class="input input-primary" placeholder="DebouncedServerInput"
-                    @bind-Value="ServerInputValue"/>
-</p>
-
-<p>
-    Server Input Value: @ServerInputValue
-</p>
-
-<hr/>
-
-<h1>DebouncedClientInput Test</h1>
-<p>
-    <DebouncedClientInput class="input input-primary" placeholder="DebouncedClientInput"
-                          @bind-Value="ClientInputValue"/>
-</p>
-<p>
-    Client Input Value: @ClientInputValue
-</p>
-
+@inject IJSRuntime JSRuntime;
+@inject ILogger<Tryserver> _logger;
 
 @code {
-    private string ServerInputValue = "1234";
-    private string ClientInputValue = "4321";
+    public bool JSRuntimeInProcess => JSRuntime is IJSInProcessRuntime;
+    public bool BrowserOS => OperatingSystem.IsBrowser();
+
+    protected override void OnInitialized()
+    {
+        _logger.LogInformation($"{nameof(OnInitialized)}, JSRuntimeInProcess={JSRuntimeInProcess}, BrowserOS={BrowserOS}");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        _logger.LogInformation($"{nameof(OnAfterRender)}, JSRuntimeInProcess={JSRuntimeInProcess}, BrowserOS={BrowserOS}, firstRender={firstRender}");
+    }
+
 }

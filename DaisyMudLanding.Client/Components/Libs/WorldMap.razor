@@ -1,4 +1,4 @@
-@rendermode @(new InteractiveServerRenderMode(false))
+@rendermode InteractiveServer
 
 <WorldMapImage class="w-[max(30rem,100%)] fill-base-content" @attributes="@AdditionalAttributes"/>
 
@@ -15,12 +15,6 @@
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> AdditionalAttributes { get; set; } = new();
 
-    protected override async Task OnInitializedAsync()
-    {
-        await base.OnInitializedAsync();
-        CountryList = await _countryListService.GetCountryList(CancellationToken.None);
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
@@ -28,6 +22,11 @@
         {
             _jsModule = await _js.InvokeAsync<IJSObjectReference>("import",
                 $"./Components/Libs/{nameof(WorldMap)}.razor.js");
+            if (CountryList is null)
+            {
+                CountryList = await _countryListService.GetCountryList(CancellationToken.None);
+                StateHasChanged();
+            }
         }
 
         if (_jsModule is null || CountryList is null) return;

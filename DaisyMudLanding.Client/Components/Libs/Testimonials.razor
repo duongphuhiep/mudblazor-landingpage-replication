@@ -1,4 +1,4 @@
-@rendermode @(new InteractiveServerRenderMode(false))
+@rendermode InteractiveServer
 <ShowMore>
     <div class="flex flex-row flex-wrap justify-around gap-5">
         @if (TestimonialsList is null)
@@ -24,9 +24,15 @@
 {
     public Testimonial[]? TestimonialsList { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await base.OnInitializedAsync();
-        TestimonialsList = await _testimonialService.GetTestimonials(CancellationToken.None);
+        if (firstRender)
+        {
+            if (TestimonialsList is null)
+            {
+                TestimonialsList = await _testimonialService.GetTestimonials(CancellationToken.None);
+                StateHasChanged();
+            }
+        }
     }
 }

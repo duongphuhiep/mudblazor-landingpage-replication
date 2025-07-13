@@ -1,4 +1,4 @@
-@rendermode @(new InteractiveServerRenderMode(false))
+@rendermode InteractiveServer
 <div class="dropdown dropdown-start lg:dropdown-end">
     <div tabindex="0" role="button" class="indicator">
         <span class="indicator-item status status-info"></span>
@@ -33,16 +33,20 @@
 </div>
 
 @inject NotificationService _notificationService
-@inject ILogger<NotificationBell> _logger
 
 @code
 {
     public Notification[]? Notifications { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await base.OnInitializedAsync();
-
-        Notifications = await _notificationService.GetNotifications(CancellationToken.None);
+        if (firstRender)
+        {
+            if (Notifications is null)
+            {
+                Notifications = await _notificationService.GetNotifications(CancellationToken.None);
+                StateHasChanged();
+            }
+        }
     }
 }
