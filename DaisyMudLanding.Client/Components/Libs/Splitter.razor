@@ -1,0 +1,20 @@
+<!-- 12-deg skewed horizontal splitter -->
+<!-- 10.628% is half the height of this skewed splitter = tan(12deg)/2 -->
+@if (LightToDark)
+{
+    <div
+        class="bg-[linear-gradient(-12deg,var(--color-base-100)_50%,var(--color-base-200)_50%)]
+        rtl:bg-[linear-gradient(12deg,var(--color-base-100)_50%,var(--color-base-200)_50%)]
+        py-[10.628%]">
+    </div>
+} else {
+    <div
+        class="bg-[linear-gradient(-12deg,var(--color-base-200)_50%,var(--color-base-100)_50%)]
+        rtl:bg-[linear-gradient(12deg,var(--color-base-200)_50%,var(--color-base-100)_50%)]
+        py-[10.628%]">
+    </div>
+}
+
+@code {
+    [Parameter] public bool LightToDark { get; set; }
+}

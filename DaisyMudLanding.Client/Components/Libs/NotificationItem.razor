@@ -1,0 +1,14 @@
+<a class="list-row hover:bg-base-200 hover:cursor-pointer @(Notification is null ? "skeleton" : "")">
+    <div>
+        <div class="@(Notification is null ? "skeleton text-transparent" : "")">
+            @(Notification?.Title ?? "v8: Riding the Momentum of v7")
+        </div>
+        <div class="@(Notification is null ? "skeleton text-transparent" : "landing-text-c50")">
+            <span>@(Notification?.Author ?? "The MudBlazor Team")</span>🔹<span>@(Notification?.Date ?? "Jan 19, 2025")</span>
+        </div>
+    </div>
+</a>
+
+@code {
+    [Parameter] public Notification? Notification { get; set; }
+}

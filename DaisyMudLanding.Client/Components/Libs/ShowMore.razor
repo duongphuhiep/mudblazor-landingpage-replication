@@ -1,0 +1,15 @@
+<div>
+    <input type="checkbox" id="showLessToggler" class="hidden"/>
+    <div id="showMoreContent" class="overflow-x-clip max-h-80 relative">
+        @ChildContent
+        <div class="gradient-bottom"></div>
+    </div>
+    <div class="toggler flex justify-center my-10">
+        <label class="btn btn-primary" id="showMore" for="showLessToggler">Show More</label>
+        <label class="btn btn-primary" id="showLess" for="showLessToggler">Show Less</label>
+    </div>
+</div>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}

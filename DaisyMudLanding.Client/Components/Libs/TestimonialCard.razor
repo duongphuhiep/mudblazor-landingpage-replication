@@ -1,0 +1,21 @@
+<div class="bg-base-300 rounded p-6 max-w-lg">
+    <div class="grid grid-cols-[32px_1fr] gap-5!">
+        <div class="max-h-[32px] overflow-clip">
+            <span class="text-5xl landing-text-c50">❞</span>
+        </div>
+        <div>
+            <div
+                class="@(_isSkeleton ? "skeleton text-transparent" : "")">@(Testimonial?.Name ?? "Developer Team")</div>
+            <div
+                class="@(_isSkeleton ? "skeleton text-transparent" : "")">@(Testimonial?.Company ?? "Wunderminds")</div>
+        </div>
+        <div class="col-span-2 landing-text-small @(_isSkeleton ? "skeleton text-transparent" : "landing-text-c50")">
+            @(Testimonial?.Comment ?? "Saving us from tons of tiny details and allowing us to deliver sharp looking modern web applications, MudBlazor is the king of open source UI frameworks that no one should miss when building apps with Blazor!")
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Testimonial? Testimonial { get; set; }
+    private bool _isSkeleton => Testimonial is null;
+}

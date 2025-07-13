@@ -1,0 +1,21 @@
+::deep .landinglinks div div svg {
+    fill: currentColor;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+.landinglinks h3 {
+    opacity: 1;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.landinglinks div {
+    min-width: calc(var(--spacing) * 20);
+}
+.landinglinks div div {
+    opacity: var(--landing-text-opacity);
+    margin-bottom: 0.75rem;
+}
+.landinglinks > div:first-child > div:last-child > a:hover {
+    background-color: var(--color-primary);
+}

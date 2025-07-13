@@ -1,0 +1,120 @@
+@* wrapper around a HTML dialog element *@
+@rendermode InteractiveAuto
+
+<dialog @attributes="_additionalEligibleAttributes" @ref="DialogElement">
+    @ChildContent
+</dialog>
+
+@implements IAsyncDisposable
+@inject ILogger<Dialog> _logger
+@inject IJSRuntime _js
+
+@code {
+    public ElementReference? DialogElement { get; private set; }
+    private IJSObjectReference? _jsModule;
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> AdditionalAttributes { get; set; } = new();
+
+    private IReadOnlyDictionary<string, object> _additionalEligibleAttributes =>
+        AdditionalAttributes.Where(kvp => !kvp.Key.StartsWith("@"))
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            _jsModule = await _js.InvokeAsync<IJSObjectReference>("import",
+                $"./_content/{Constants.ProjectName}/Components/{nameof(Dialog)}.razor.js");
+        }
+    }
+
+    public async Task ShowModal(ElementReference? focusElement = null)
+    {
+        if (_jsModule is null || DialogElement is null)
+        {
+            return;
+        }
+
+        await _jsModule.InvokeVoidAsync("showModal", DialogElement, focusElement);
+    }
+
+    public async Task Show(ElementReference? focusElement = null)
+    {
+        if (_jsModule is null || DialogElement is null)
+        {
+            return;
+        }
+
+        await _jsModule.InvokeVoidAsync("show", DialogElement, focusElement);
+    }
+
+    public async Task Close(string returnValue)
+    {
+        if (_jsModule is null || DialogElement is null)
+        {
+            return;
+        }
+
+        await _jsModule.InvokeVoidAsync("close", DialogElement, returnValue);
+    }
+
+
+    public async Task Click()
+    {
+        if (_jsModule is null || DialogElement is null)
+        {
+            return;
+        }
+
+        await _jsModule.InvokeVoidAsync("click", DialogElement);
+    }
+
+    public async Task HidePopover()
+    {
+        if (_jsModule is null || DialogElement is null)
+        {
+            return;
+        }
+
+        await _jsModule.InvokeVoidAsync("hidePopover", DialogElement);
+    }
+
+    public async Task ShowPopover()
+    {
+        if (_jsModule is null || DialogElement is null)
+        {
+            return;
+        }
+
+        await _jsModule.InvokeVoidAsync("showPopover", DialogElement);
+    }
+
+    public async Task TogglePopover(bool force)
+    {
+        if (_jsModule is null || DialogElement is null)
+        {
+            return;
+        }
+
+        await _jsModule.InvokeVoidAsync("togglePopover", DialogElement, force);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_jsModule is null)
+            return;
+        try
+        {
+            await _jsModule.DisposeAsync();
+        }
+        catch (JSDisconnectedException ex)
+        {
+            _logger.LogDebug(ex, "disconnected while disposing jsModule");
+        }
+    }
+
+}

@@ -1,0 +1,75 @@
+@rendermode @(new InteractiveServerRenderMode(false))
+<Dialog
+    @ref="_dialog"
+    class="modal modal-top scroll-0 [scrollbar-gutter:stable_both-edges]">
+    <div class="modal-box max-w-md mx-auto">
+        <label class="input input-primary input-lg w-full">
+            <LiSearch/>
+            <DebouncedInput
+                type="search"
+                required
+                placeholder="Search"
+                @ref="_searchInput"
+                ValueChanged="OnValueChanged"
+                autofocus
+            />
+        </label>
+        <div class="max-h-79 overflow-y-scroll list">
+            @if (SearchResult is null)
+            {
+                //print a skeleton
+                <SearchItem Term=@_searchTerm FoundItem=@_SampleFoundItem IsSkeleton="true"></SearchItem>
+            }
+            else
+            {
+                @foreach (var item in SearchResult)
+                {
+                    <SearchItem Term=@_searchTerm FoundItem=item></SearchItem>
+                }
+            }
+        </div>
+        <div class="opacity-20 text-xs mt-2 float-end">
+            Press ESC key or click outside to close
+        </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button></button>
+    </form>
+</Dialog>
+
+@inject SearchService _searchService
+
+@code
+{
+    private static readonly FoundItem _SampleFoundItem = new()
+    {
+        Url = "",
+        Title = "Lorem",
+        Description = "Lorem ipsum dolor sit amet <span>consectetur</span> adipisicing elit."
+    };
+
+    private Dialog? _dialog;
+    private DebouncedInput? _searchInput;
+    public FoundItem[]? SearchResult { get; set; }
+
+    private string? _searchTerm { get; set; }
+
+    public async Task ShowModalAsync()
+    {
+        if (_dialog is null) return;
+        await _dialog.ShowModal(_searchInput?.InputElement);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        SearchResult = await _searchService.QuerySearchResultFromDatabase("", CancellationToken.None);
+    }
+
+    private async Task OnValueChanged(string arg)
+    {
+        _searchTerm = arg;
+        SearchResult = null; //display skelaton
+        SearchResult = await _searchService.QuerySearchResultFromDatabase(arg, CancellationToken.None);
+    }
+}

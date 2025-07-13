@@ -1,0 +1,48 @@
+@rendermode @(new InteractiveServerRenderMode(false))
+<div class="dropdown dropdown-start lg:dropdown-end">
+    <div tabindex="0" role="button" class="indicator">
+        <span class="indicator-item status status-info"></span>
+        <a class="tooltip tooltip-bottom" data-tip="Notifications">
+            <LiBell/>
+        </a>
+    </div>
+
+    <div tabindex="0" class="dropdown-content z-1">
+        <div class="list bg-base-100 rounded-box w-80 p-2 shadow-md inset-x-5">
+            <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">
+                Notifications
+            </li>
+
+            @if (Notifications is null)
+            {
+                @for (var i = 0; i <= 1; i++)
+                {
+                    //Skeleton
+                    <NotificationItem/>
+                }
+            }
+            else
+            {
+                @foreach (var notif in Notifications)
+                {
+                    <NotificationItem Notification="notif"/>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@inject NotificationService _notificationService
+@inject ILogger<NotificationBell> _logger
+
+@code
+{
+    public Notification[]? Notifications { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        Notifications = await _notificationService.GetNotifications(CancellationToken.None);
+    }
+}

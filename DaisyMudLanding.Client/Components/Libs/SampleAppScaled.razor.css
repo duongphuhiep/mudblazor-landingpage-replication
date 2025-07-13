@@ -1,0 +1,10 @@
+iframe {
+    --sample-app-scale: 0.7;
+    width: calc(
+        100% / var(--sample-app-scale)
+    ); /* Original width divided by scale factor to make it appear 100% after scaling */
+    height: calc(
+        100% / var(--sample-app-scale)
+    ); /* Original height divided by scale factor */
+    transform: scale(var(--sample-app-scale));
+}

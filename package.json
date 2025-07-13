@@ -1,0 +1,19 @@
+{
+    "name": "blazor-playground",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "tailwindcss -i ./taildai.css -o ./DaisyMudLanding/wwwroot/css/td.css --watch",
+        "build": "tailwindcss -i ./taildai.css -o ./DaisyMudLanding/wwwroot/css/td.css --minify"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "packageManager": "pnpm@10.12.1",
+    "devDependencies": {
+        "@tailwindcss/cli": "^4.1.11",
+        "daisyui": "^5.0.46",
+        "tailwindcss": "^4.1.11"
+    }
+}

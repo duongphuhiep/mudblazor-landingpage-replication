@@ -1,0 +1,61 @@
+/* Styles for the typing animation */
+.marker {
+    display: inline-block; /* Essential for width animation */
+    overflow: hidden; /* Hides content beyond the current width */
+    white-space: nowrap; /* Keeps content on a single line */
+    vertical-align: bottom;
+    interpolate-size: allow-keywords; /* Enable animation to/from intrinsic sizes */
+    border-right: 0.15em solid transparent; /* The blinking cursor */
+}
+
+.typing-animation1 {
+    animation: typing1 20s steps(266, end) forwards infinite;
+}
+
+.typing-animation2 {
+    animation: typing2 20s steps(266, end) forwards infinite;
+}
+
+/* Keyframes for the typing animation */
+@keyframes typing1 {
+    0% {
+        /* 0s: start typing */
+        width: 0;
+        border-color: orange;
+    }
+    15% {
+        /* 3s: end typing */
+        width: max-content; /* Or a fixed width like 200px if not using max-content */
+    }
+    25% {
+        border-color: transparent;
+    }
+    100% {
+        width: max-content; /* Keep the width at its final state */
+    }
+}
+
+/* Keyframes for the typing animation */
+@keyframes typing2 {
+    0% {
+        width: 0;
+    }
+    25% {
+        /*5s: start typing*/
+        width: 0; /* Or a fixed width like 200px if not using max-content */
+        border-color: orange;
+    }
+    30% {
+        /*6s end typing*/
+        width: max-content; /* Or a fixed width like 200px if not using max-content */
+    }
+    100% {
+        width: max-content; /* Keep the width at its final state */
+        border-color: transparent;
+    }
+}
+
+/* Optional: Hide the line initially until JS reveals it */
+.marker {
+    width: 0;
+}

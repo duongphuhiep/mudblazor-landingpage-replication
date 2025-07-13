@@ -1,0 +1,46 @@
+@rendermode @(new InteractiveServerRenderMode(false))
+<div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+    <div>
+        <div class="text-5xl my-4 @_skeleton">@(StatsData?.Downloads ?? "???")</div>
+        <div>
+            <DownloadColor class="me-2 w-6 inline"/>
+            Downloads
+        </div>
+    </div>
+    <div>
+        <div class="text-5xl my-4 @_skeleton">@(StatsData?.GithubStars ?? "???")</div>
+        <div>
+            <GithubColor class="me-2 w-6 inline"/>
+            Github Stars
+        </div>
+    </div>
+    <div>
+        <div class="text-5xl my-4 @_skeleton">@(StatsData?.Contributors ?? "???")</div>
+        <div>
+            <ContributorColor class="me-2 w-6 inline"/>
+            Contributors
+        </div>
+    </div>
+    <div>
+        <div class="text-5xl my-4 @_skeleton">@(StatsData?.DiscordMembers ?? "???")</div>
+        <div>
+            <DiscordColor class="me-2 w-6 inline"/>
+            Discord Members
+        </div>
+    </div>
+</div>
+
+@inject StatsService _statsService
+
+@code
+{
+    public StatsData? StatsData { get; set; }
+
+    private string _skeleton => StatsData is null ? "skeleton text-transparent" : "text-primary";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        StatsData = await _statsService.GetStats(CancellationToken.None);
+    }
+}

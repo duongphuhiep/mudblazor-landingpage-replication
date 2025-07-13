@@ -1,0 +1,46 @@
+.anim1 {
+    animation: showup1 20s steps(2, end) forwards infinite;
+    visibility: hidden;
+    opacity: 0;
+}
+@keyframes showup1 {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    15.99% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    16% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+.anim2 {
+    animation: showup2 20s steps(2, end) forwards infinite;
+    visibility: hidden;
+    opacity: 0;
+}
+@keyframes showup2 {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    30.99% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    31% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}

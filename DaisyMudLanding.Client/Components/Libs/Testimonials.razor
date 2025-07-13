@@ -1,0 +1,32 @@
+@rendermode @(new InteractiveServerRenderMode(false))
+<ShowMore>
+    <div class="flex flex-row flex-wrap justify-around gap-5">
+        @if (TestimonialsList is null)
+        {
+            @for (var i = 0; i < 4; i++)
+            {
+                <TestimonialCard/>
+            }
+        }
+        else
+        {
+            @foreach (var t in TestimonialsList)
+            {
+                <TestimonialCard Testimonial="t"/>
+            }
+        }
+    </div>
+</ShowMore>
+
+@inject TestimonialService _testimonialService
+
+@code
+{
+    public Testimonial[]? TestimonialsList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        TestimonialsList = await _testimonialService.GetTestimonials(CancellationToken.None);
+    }
+}

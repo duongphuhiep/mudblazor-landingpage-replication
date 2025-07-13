@@ -1,0 +1,31 @@
+@page "/tryserver"
+@rendermode InteractiveServer
+
+<h1>InteractiveServer</h1>
+
+<h1>DebouncedServerInput Test</h1>
+<p>
+    <DebouncedInput class="input input-primary" placeholder="DebouncedServerInput"
+                    @bind-Value="ServerInputValue"/>
+</p>
+
+<p>
+    Server Input Value: @ServerInputValue
+</p>
+
+<hr/>
+
+<h1>DebouncedClientInput Test</h1>
+<p>
+    <DebouncedClientInput class="input input-primary" placeholder="DebouncedClientInput"
+                          @bind-Value="ClientInputValue"/>
+</p>
+<p>
+    Client Input Value: @ClientInputValue
+</p>
+
+
+@code {
+    private string ServerInputValue = "1234";
+    private string ClientInputValue = "4321";
+}

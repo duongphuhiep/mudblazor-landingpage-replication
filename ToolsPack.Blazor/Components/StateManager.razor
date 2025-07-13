@@ -1,0 +1,70 @@
+@* Origin idea from: https://gist.github.com/EngstromJimmy/e51b8166cf2fb61f8760c5ea20d575af  *@
+@typeparam T
+@inject PersistentComponentState _persistentComponentState
+@implements IDisposable
+
+@ChildContent(Value)
+@inject ILogger<StateManager<T>> _logger
+
+@code {
+    [Parameter] [EditorRequired] public required RenderFragment<T?> ChildContent { get; set; }
+
+    [Parameter] [EditorRequired] public required Func<ValueTask<T?>> GetState { get; set; }
+
+    [Parameter] [EditorRequired] public required string StateKey { get; set; }
+
+    private T? _value;
+
+    [Parameter]
+    public T? Value
+    {
+        get => _value;
+        set
+        {
+            _value = value;
+            StateHasChanged();
+        }
+    }
+
+    [Parameter] public EventCallback<T?> ValueChanged { get; set; }
+
+    private PersistingComponentStateSubscription _subscription;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _subscription = _persistentComponentState.RegisterOnPersisting(SaveState);
+
+        if (_persistentComponentState.TryTakeFromJson<T>(StateKey, out var storedState) && storedState != null)
+        {
+            _value = storedState;
+        }
+        else
+        {
+            _value = await GetState.Invoke();
+            try
+            {
+                await ValueChanged.InvokeAsync(_value);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"{nameof(ValueChanged)} event handler crashed");
+            }
+
+            StateHasChanged();
+        }
+
+        await base.OnInitializedAsync();
+    }
+
+    private Task SaveState()
+    {
+        _persistentComponentState.PersistAsJson(StateKey, Value);
+        return Task.CompletedTask;
+    }
+
+    void IDisposable.Dispose()
+    {
+        _subscription.Dispose();
+    }
+
+}

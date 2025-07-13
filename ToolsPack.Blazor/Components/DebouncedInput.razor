@@ -1,0 +1,98 @@
+@rendermode InteractiveAuto
+@using System.Timers
+@implements IDisposable
+
+<input @ref="InputElement" value="@Value" @oninput="OnInputChanged" @attributes="_additionalEligibleAttributes"/>
+
+@inject ILogger<DebouncedInput> _logger;
+
+@code {
+    public ElementReference? InputElement { get; private set; }
+    private Timer? _timer;
+    private string _value = string.Empty;
+
+    [Parameter]
+    public string Value
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            InternalValue = value;
+            StateHasChanged();
+        }
+    }
+
+    public string InternalValue { get; private set; } = string.Empty;
+
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+    [Parameter] public EventCallback<string> InternalValueChanged { get; set; }
+
+    [Parameter] public int DebounceIntervalMiliSeconds { get; set; } = 500;
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? AdditionalAttributes { get; set; }
+
+    private IReadOnlyDictionary<string, object>? _additionalEligibleAttributes =>
+        AdditionalAttributes?.Where(kvp => !kvp.Key.StartsWith("@"))
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+    private async Task OnInputChanged(ChangeEventArgs e)
+    {
+        InternalValue = e.Value?.ToString() ?? string.Empty;
+
+        // Initialize timer if it doesn't exist
+        if (_timer == null)
+        {
+            _timer = new Timer(DebounceIntervalMiliSeconds);
+            _timer.Elapsed += OnTimerElapsed;
+            _timer.AutoReset = false;
+        }
+
+        // Reset and restart the timer
+        _timer.Stop();
+        _timer.Interval = DebounceIntervalMiliSeconds; // In case DebounceInterval changed
+        _timer.Start();
+
+        try
+        {
+            await InternalValueChanged.InvokeAsync(InternalValue);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"{nameof(InternalValueChanged)} event handler crashed");
+        }
+    }
+
+    private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        InvokeAsync(async () =>
+        {
+            // Only raise ValueChanged if the value actually changed
+            if (_value == InternalValue) return;
+
+            _value = InternalValue;
+            try
+            {
+                await ValueChanged.InvokeAsync(_value);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"{nameof(ValueChanged)} event handler crashed");
+            }
+
+            StateHasChanged();
+        }).FireAndForget(_logger);
+    }
+
+    public void Dispose()
+    {
+        if (_timer == null) return;
+        _timer.Stop();
+        _timer.Elapsed -= OnTimerElapsed;
+        _timer.Dispose();
+        _timer = null;
+    }
+
+}

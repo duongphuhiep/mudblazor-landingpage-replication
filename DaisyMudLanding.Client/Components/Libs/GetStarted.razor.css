@@ -1,0 +1,9 @@
+.left-mark::before {
+    content: "";
+    position: absolute;
+    top: 0.3em;
+    left: -1rem;
+    width: 0.2rem;
+    height: 1em;
+    background-color: var(--color-primary);
+}

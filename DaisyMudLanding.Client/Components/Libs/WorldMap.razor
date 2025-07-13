@@ -1,0 +1,51 @@
+@rendermode @(new InteractiveServerRenderMode(false))
+
+<WorldMapImage class="w-[max(30rem,100%)] fill-base-content" @attributes="@AdditionalAttributes"/>
+
+@implements IAsyncDisposable
+@inject ILogger<DebouncedClientInput> _logger
+@inject IJSRuntime _js
+@inject CountryListService _countryListService
+
+@code {
+    private IJSObjectReference? _jsModule;
+
+    public string[]? CountryList { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> AdditionalAttributes { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        CountryList = await _countryListService.GetCountryList(CancellationToken.None);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            _jsModule = await _js.InvokeAsync<IJSObjectReference>("import",
+                $"./Components/Libs/{nameof(WorldMap)}.razor.js");
+        }
+
+        if (_jsModule is null || CountryList is null) return;
+        await _jsModule.InvokeVoidAsync("HighlightCountry", CountryList, "fill-primary");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_jsModule is null)
+            return;
+        try
+        {
+            await _jsModule.DisposeAsync();
+        }
+        catch (JSDisconnectedException ex)
+        {
+            _logger.LogDebug(ex, "disconnected while disposing jsModule");
+        }
+    }
+
+}

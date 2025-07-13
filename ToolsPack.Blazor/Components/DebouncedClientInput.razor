@@ -1,0 +1,113 @@
+@* this is a failed experiment, each time the component is re-rendered, we lost the cursor position (it jumps to the end of the text) *@
+@rendermode InteractiveAuto
+
+<input @attributes="_additionalEligibleAttributes"
+       @ref="InputElement"
+       @bind:get="Value"
+       @bind:set="SetValue"
+       @bind:event="ondebounceinput"
+/>
+@implements IAsyncDisposable
+@inject ILogger<DebouncedClientInput> _logger
+@inject IJSRuntime _js
+
+@code {
+    public ElementReference? InputElement { get; private set; }
+    private IJSObjectReference? _jsModule;
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> AdditionalAttributes { get; set; } = new();
+
+    private IReadOnlyDictionary<string, object> _additionalEligibleAttributes =>
+        AdditionalAttributes.Where(kvp => !kvp.Key.StartsWith("@"))
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+
+    /// <summary>
+    ///     This parameter is not reactive. Once the component is rendered for the first time, then
+    ///     changing it won't have any effect.
+    /// </summary>
+    [Parameter]
+    public int DebounceIntervalMiliSeconds { get; set; } = 500;
+
+    private string _value = "";
+
+    [Parameter]
+    public string Value
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            SetClientValue(value).FireAndForget(_logger);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            _jsModule = await _js.InvokeAsync<IJSObjectReference>("import",
+                $"./_content/{Constants.ProjectName}/Components/{nameof(DebouncedClientInput)}.razor.js");
+            await _jsModule.InvokeVoidAsync("supportDebounceInputEvent", InputElement, DebounceIntervalMiliSeconds);
+            await _jsModule.InvokeVoidAsync("setBounceValue", InputElement, Value);
+        }
+    }
+
+    private async Task SetClientValue(string _)
+    {
+        await InvokeAsync(async () =>
+        {
+            if (_jsModule is null || InputElement is null)
+            {
+                return;
+            }
+
+            await _jsModule.InvokeVoidAsync("setBounceValue", InputElement, Value);
+        });
+    }
+
+    private async Task SetValue(string arg)
+    {
+        string newValue;
+        if (_jsModule is null)
+        {
+            newValue = arg;
+        }
+        else
+        {
+            newValue = await _jsModule.InvokeAsync<string?>("getBounceValue", InputElement) ?? "";
+        }
+
+        if (_value != newValue)
+        {
+            _value = newValue;
+            try
+            {
+                await ValueChanged.InvokeAsync(newValue);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"{nameof(ValueChanged)} event handler crashed");
+            }
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_jsModule is null)
+            return;
+        try
+        {
+            await _jsModule.DisposeAsync();
+        }
+        catch (JSDisconnectedException ex)
+        {
+            _logger.LogDebug(ex, "disconnected while disposing jsModule");
+        }
+    }
+
+}

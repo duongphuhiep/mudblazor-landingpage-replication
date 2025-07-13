@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@plugin "daisyui"; {
+    exclude: rootscrollgutter;
+}
+
+@theme {
+    --font-sans: "Public Sans", "Roboto", "Arial", "sans-serif";
+    --landing-text-opacity: 0.7;
+    --sample-app-scale: 0.7;
+}
+
+@layer components {
+    .landing-text {
+        @apply leading-8 text-[clamp(0.75rem,4vw,1.125rem)];
+    }
+
+    .landing-text-large {
+        @apply leading-10 text-[clamp(1rem,5vw,1.5rem)];
+    }
+
+    .landing-text-small {
+        @apply leading-6 text-[clamp(0.625rem,3vw,1rem)];
+    }
+
+    .landing-text-c50 {
+        opacity: var(--landing-text-opacity);
+    }
+}

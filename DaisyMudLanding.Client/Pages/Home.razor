@@ -1,0 +1,190 @@
+﻿@page "/"
+
+<PageTitle>Replication of Mud Landing page</PageTitle>
+
+<!-- start hero section with darker background -->
+<section class="bg-base-200 overflow-clip lg:py-10">
+    <!-- hero section -->
+    <div class="max-w-6xl mx-auto">
+        <div class="pt-4 mx-6 flex flex-row">
+            <div class="lg:max-w-[60%]">
+                <div
+                    class="text-[clamp(2rem,8vw,4rem)] font-bold mt-20 leading-tight">
+                    <h1>The Blazor</h1>
+                    <span
+                        class="bg-[linear-gradient(82deg,rgb(89,74,226)_0%,rgb(255,102,153)_100%)] bg-clip-text text-transparent">
+                            Component
+                        </span>
+                    Library
+                    <h1>You always wanted</h1>
+                </div>
+                <p class="my-8 landing-text landing-text-c50">
+                    With millions of downloads, from hobby developers to
+                    large enterprises, MudBlazor enables you to rapidly
+                    build amazing web applications without leaving your
+                    beloved C# language and toolchain.
+                </p>
+                <div>
+                    <button
+                        class="btn btn-primary text-[clamp(0.75rem,4vw,1rem)]">Get started
+                    </button>
+                    <button
+                        class="btn btn-outline mx-3 text-[clamp(0.50rem,4vw,1rem)]">
+                        <div>
+                            <Github width="20px" class="fill-current"/>
+                        </div>
+                        Star on GitHub
+                    </button>
+                </div>
+            </div>
+            <!-- sample app -->
+            <div class="hidden lg:block relative">
+                <div class="absolute z-10" style="inset-inline-start: 8rem">
+                    <MockupTablet/>
+                </div>
+                <div
+                    class="absolute z-20"
+                    style="inset-block-start: 14rem;">
+                    <MockupPhone/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end hero section -->
+
+    <SkewBand/>
+
+    <!-- start sponsor section with darker background -->
+    <div class="max-w-6xl mx-auto pb-30">
+        <Sponsors/>
+    </div>
+</section>
+<!-- end darker background -->
+
+<!-- start testimonials section group with default background -->
+<section class="pt-30 pb-10">
+    <div class="mx-auto max-w-6xl">
+        <UnifiedPlatform/>
+    </div>
+</section>
+
+<Splitter LightToDark="false"/>
+
+<!-- start code-sample section group with darker background -->
+<section class="bg-base-200 py-30 overflow-clip lg:py-10">
+    <div class="flex gap-5 flex-row flex-wrap mx-auto max-w-6xl">
+        <div class="flex-1 min-w-sm mx-6">
+            <div class="flex flex-col gap-5">
+                <div class="text-primary font-bold">
+                    Designed for developers
+                </div>
+                <div class="text-2xl font-bold">
+                    Developers love to work with MudBlazor
+                </div>
+                <div class="landing-text landing-text-c50">
+                    We started MudBlazor with a simple promise, to empower
+                    the developer and fully take advantage of what Blazor
+                    offers. With MudBlazor you can create exceptional apps
+                    without the burden of mastering HTML, CSS and JS and
+                    focus your skillset on C#.
+                </div>
+            </div>
+            <div
+                class="flex flex-col gap-8 md:flex-row mt-10 landing-text-small">
+                <div class="md:flex-1 flex flex-col gap-5">
+                    <div>
+                        <CodesIcon
+                            class="fill-current"
+                            width="36"
+                            height="36"
+                        />
+                    </div>
+                    <h3>TryMudBlazor</h3>
+                    <div class="landing-text-c50">
+                        Use the full power of Blazor directly in your
+                        browser with TryMudBlazor.<br/>
+                        Fully-fledged editor with IntelliSense, multiple files
+                        and ability to save your code.
+                    </div>
+                    <div class="link link-primary">Test online</div>
+                </div>
+                <div class="md:flex-1 flex flex-col gap-5">
+                    <div>
+                        <BoxIcon
+                            class="fill-current"
+                            width="36"
+                            height="36"
+                        />
+                    </div>
+                    <h3>Templates</h3>
+                    <div class="landing-text-c50">
+                        We provide all the default Blazor templates but pre
+                        configured with MudBlazor to help you get started
+                        faster.
+                    </div>
+                    <div class="link link-primary">Explore templates</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1 min-w-sm mx-6">
+            <!-- code sample -->
+            <div class="w-full p-5 rounded">
+                <CodeSample/>
+            </div>
+            <!-- card -->
+            <div class="bg-base-100 w-96 shadow-sm ms-[64px] mt-[-48px]">
+                <CardSample/>
+            </div>
+        </div>
+    </div>
+</section>
+
+<Splitter LightToDark="true"/>
+
+<!-- start community section group with default background -->
+<section class="py-30 lg:py-10">
+    <div class="max-w-6xl mx-auto">
+        <Community/>
+    </div>
+</section>
+
+<Splitter LightToDark="false"/>
+
+<!--Start  WorldMap and Stats section in darker background -->
+<section class="py-30 bg-base-200 lg:pt-10">
+    <div class="max-w-6xl mx-auto">
+        <GlobalScale/>
+    </div>
+</section>
+
+<!-- Get Started section -->
+<section class="py-30 bg-base-100 mx-6 lg:pb-10">
+    <div class="max-w-6xl mx-auto">
+        <GetStarted/>
+    </div>
+</section>
+
+<Splitter LightToDark="false"/>
+
+<section class="py-30 bg-base-200 lg:pt-10">
+    <div class="max-w-6xl mx-auto">
+        <Links/>
+    </div>
+</section>
+
+<section class="pb-10 bg-base-200">
+    <div class="landing-text-small landing-text-c50 mx-6">
+        Copyright © 2020-2025 MudBlazor
+    </div>
+</section>
+
+@inject ILogger<Home> _Logger;
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _Logger.LogInformation("home page initialized");
+    }
+}

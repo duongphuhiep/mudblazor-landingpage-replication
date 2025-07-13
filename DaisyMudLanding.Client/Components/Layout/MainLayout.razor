@@ -1,0 +1,33 @@
+﻿@inherits LayoutComponentBase
+
+<HeadContent>
+    <script src="https://unpkg.com/@@mahozad/theme-switch"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+    />
+</HeadContent>
+
+<div class="drawer">
+    <input id="drawer-toggler" type="checkbox" class="drawer-toggle"/>
+    <div class="drawer-content">
+        <!-- Navbar -->
+        <NavBar/>
+
+        <!-- Page content here -->
+        @Body
+    </div>
+    <div class="drawer-side">
+        <label
+            for="drawer-toggler"
+            aria-label="close sidebar"
+            class="drawer-overlay"></label>
+        <DrawerContent/>
+    </div>
+</div>
+
+@* <div id="blazor-error-ui" data-nosnippet> *@
+@*     An unhandled error has occurred. *@
+@*     <a href="." class="reload">Reload</a> *@
+@*     <span class="dismiss">🗙</span> *@
+@* </div> *@

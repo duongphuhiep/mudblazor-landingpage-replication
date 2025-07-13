@@ -1,0 +1,17 @@
+@rendermode @(new InteractiveAutoRenderMode(false))
+
+<button class="tooltip tooltip-bottom" data-tip="Search" @onclick="showSearchDialog">
+    <LiSearch/>
+</button>
+<SearchDialog @ref="_searchDialog"/>
+
+@code {
+    private SearchDialog? _searchDialog;
+
+    private async Task showSearchDialog()
+    {
+        if (_searchDialog is null) return;
+        await _searchDialog.ShowModalAsync();
+    }
+
+}

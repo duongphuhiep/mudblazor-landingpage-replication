@@ -1,0 +1,14 @@
+@rendermode InteractiveAuto
+
+<button @onclick="SwitchLeftRightDirection">
+    <LiArrowRightLeft></LiArrowRightLeft>
+</button>
+
+@code {
+    [Inject] public required IJSRuntime JsRuntime { get; set; } // Inject the IJSRuntime service
+
+    private async Task SwitchLeftRightDirection()
+    {
+        await JsRuntime.InvokeVoidAsync("eval", "document.dir = document.dir === 'rtl' ? 'ltr' : 'rtl';");
+    }
+}
