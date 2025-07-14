@@ -1,0 +1,70 @@
+---
+import { DollarSign, ShoppingCart, Users, CreditCard } from '@lucide/astro';
+import CustomerAcquisition from './CustomerAcquisition.astro';
+import GlobalSales from './GlobalSales.astro';
+import QuickChat from './QuickChat.astro';
+import RecentOrders from './RecentOrders.astro';
+import RevenueChart from './RevenueChart.astro';
+import StatsCard from './StatsCard.astro';
+---
+
+<main class='flex-1 p-4 lg:p-6 bg-base-100'>
+    <!-- Stats Cards -->
+    <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6'>
+        <StatsCard
+            title='Revenue'
+            value='$587.54'
+            change='+10.8%'
+            trend='up'
+            comparison='vs. $494.16 last period'
+            icon={DollarSign}
+        />
+        <StatsCard
+            title='Sales'
+            value='4500'
+            change='+21.2%'
+            trend='up'
+            comparison='vs. 3845 last period'
+            icon={ShoppingCart}
+        />
+        <StatsCard
+            title='Customers'
+            value='2242'
+            change='-6.6%'
+            trend='down'
+            comparison='vs. 2448 last period'
+            icon={Users}
+        />
+        <StatsCard
+            title='Spending'
+            value='$112.54'
+            change='+8.5%'
+            trend='up'
+            comparison='vs. $98.14 last period'
+            icon={CreditCard}
+        />
+    </div>
+
+    <!-- Charts Row -->
+    <div class='grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6'>
+        <div class='lg:col-span-1'>
+            <RevenueChart />
+        </div>
+        <div class='lg:col-span-1'>
+            <CustomerAcquisition />
+        </div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class='grid grid-cols-1 lg:grid-cols-3 gap-6'>
+        <div class='lg:col-span-1'>
+            <RecentOrders />
+        </div>
+        <div class='lg:col-span-1'>
+            <QuickChat />
+        </div>
+        <div class='lg:col-span-1'>
+            <GlobalSales />
+        </div>
+    </div>
+</main>

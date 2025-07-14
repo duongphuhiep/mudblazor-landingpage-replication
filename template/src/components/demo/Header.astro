@@ -1,0 +1,58 @@
+---
+import { Search, MessageSquare, Bell, Menu } from '@lucide/astro';
+---
+
+<header class='navbar bg-base-100 border-b border-base-300 px-4 lg:px-6'>
+    <div class='navbar-start'>
+        <label for='drawer-toggle' class='btn btn-ghost btn-circle lg:hidden'>
+            <Menu size={20} />
+        </label>
+        <div class='hidden lg:flex'>
+            <label class='input'>
+                <Search />
+                <input type='search' required placeholder='Search' />
+            </label>
+        </div>
+    </div>
+
+    <div class='navbar-center lg:hidden'>
+        <div class='flex items-center gap-2'>
+            <div
+                class='w-8 h-8 bg-primary rounded-lg flex items-center justify-center'>
+                <span class='text-primary-content font-bold text-sm'>N</span>
+            </div>
+            <span class='text-xl font-bold'>Nexus</span>
+        </div>
+    </div>
+
+    <div class='navbar-end'>
+        <div class='flex items-center gap-2'>
+            <button class='btn btn-ghost btn-circle'>
+                <MessageSquare size={20} />
+            </button>
+            <button class='btn btn-ghost btn-circle'>
+                <Bell size={20} />
+            </button>
+            <div class='dropdown dropdown-end'>
+                <div
+                    tabindex='0'
+                    role='button'
+                    class='btn btn-ghost btn-circle avatar'>
+                    <div class='w-8 rounded-full bg-primary'>
+                        <span
+                            class='text-primary-content text-sm font-medium flex items-center justify-center w-full h-full'
+                            >DN</span
+                        >
+                    </div>
+                </div>
+                <ul
+                    tabindex='0'
+                    class='mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-200 rounded-box w-52'>
+                    <li><a>Profile</a></li>
+                    <li><a>Settings</a></li>
+                    <li><a>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

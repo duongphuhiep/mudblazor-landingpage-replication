@@ -1,0 +1,18 @@
+---
+const { person, company } = Astro.props;
+---
+
+<div class='bg-base-300 rounded p-6 max-w-lg'>
+    <div class='grid grid-cols-[32px_1fr] gap-5!'>
+        <div class='max-h-[32px] overflow-clip'>
+            <span class='text-5xl landing-text-c50'>❞</span>
+        </div>
+        <div>
+            <div>{person}</div>
+            <div>{company}</div>
+        </div>
+        <div class='col-span-2 landing-text-small landing-text-c50'>
+            <slot />
+        </div>
+    </div>
+</div>

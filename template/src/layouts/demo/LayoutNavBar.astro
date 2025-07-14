@@ -1,0 +1,17 @@
+---
+import Header from '../../components/demo/Header.astro';
+import Sidebar from '../../components/demo/Sidebar.astro';
+import Layout from './Layout.astro';
+---
+
+<Layout>
+    <div class='drawer lg:drawer-open'>
+        <input id='drawer-toggle' type='checkbox' class='drawer-toggle' />
+        <!-- Page content here -->
+        <div class='drawer-content flex flex-col'>
+            <Header />
+            <slot />
+        </div>
+        <Sidebar />
+    </div>
+</Layout>

@@ -1,0 +1,62 @@
+<style>
+    #showMore {
+        padding-top: 0.5rem;
+        display: inline-block;
+    }
+    #showLess {
+        padding-top: 0.5rem;
+        display: none;
+    }
+    #showLessToggler ~ .toggler > #showMore {
+        display: inline-block;
+    }
+    #showLessToggler:checked ~ .toggler > #showMore {
+        display: none;
+    }
+    #showLessToggler ~ .toggler > .toggler > #showLess {
+        display: none;
+    }
+    #showLessToggler:checked ~ .toggler > #showLess {
+        display: inline-block;
+    }
+    #showMoreContent {
+        overflow-y: hidden;
+    }
+    #showLessToggler ~ #showMoreContent {
+        max-height: 30rem;
+    }
+    #showLessToggler:checked ~ #showMoreContent {
+        max-height: inherit;
+    }
+
+    .gradient-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 6rem;
+        background: linear-gradient(transparent, var(--color-base-100));
+    }
+    #showLessToggler ~ div > .gradient-bottom {
+        display: block;
+    }
+    #showLessToggler:checked ~ div > .gradient-bottom {
+        display: none;
+    }
+</style>
+
+<div>
+    <input type='checkbox' id='showLessToggler' class='hidden' />
+    <div id='showMoreContent' class='overflow-x-clip max-h-80 relative'>
+        <slot />
+        <div class='gradient-bottom'></div>
+    </div>
+    <div class='toggler flex justify-center my-10'>
+        <label class='btn btn-primary' id='showMore' for='showLessToggler'
+            >Show More</label
+        >
+        <label class='btn btn-primary' id='showLess' for='showLessToggler'
+            >Show Less</label
+        >
+    </div>
+</div>

@@ -1,0 +1,124 @@
+---
+import { Download, Eye, Trash2 } from '@lucide/astro';
+---
+
+<div class="card bg-base-200 shadow-lg">
+  <div class="card-body p-6">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-lg font-semibold text-base-content">Recent Orders</h3>
+      <button class="btn btn-sm btn-ghost">
+        <Download size={16} />
+        Report
+      </button>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="table w-full">
+        <thead>
+          <tr class="border-base-300">
+            <th class="text-base-content/70 font-medium">
+              <input type="checkbox" class="checkbox checkbox-sm" />
+            </th>
+            <th class="text-base-content/70 font-medium">Product</th>
+            <th class="text-base-content/70 font-medium">Price</th>
+            <th class="text-base-content/70 font-medium">Date</th>
+            <th class="text-base-content/70 font-medium">Status</th>
+            <th class="text-base-content/70 font-medium">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-base-300 hover:bg-base-300/50">
+            <td>
+              <input type="checkbox" class="checkbox checkbox-sm" />
+            </td>
+            <td>
+              <div class="flex items-center gap-3">
+                <div class="avatar">
+                  <div class="w-10 h-10 rounded-lg bg-success/20 flex items-center justify-center">
+                    <span class="text-success text-xs">👟</span>
+                  </div>
+                </div>
+                <span class="text-sm font-medium">Men's tracking shoe</span>
+              </div>
+            </td>
+            <td class="text-sm">$99</td>
+            <td class="text-sm text-base-content/70">25 Jun 2024</td>
+            <td>
+              <span class="badge badge-success badge-sm">Delivered</span>
+            </td>
+            <td>
+              <div class="flex items-center gap-2">
+                <button class="btn btn-ghost btn-xs">
+                  <Eye size={14} />
+                </button>
+                <button class="btn btn-ghost btn-xs text-error">
+                  <Trash2 size={14} />
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr class="border-base-300 hover:bg-base-300/50">
+            <td>
+              <input type="checkbox" class="checkbox checkbox-sm" />
+            </td>
+            <td>
+              <div class="flex items-center gap-3">
+                <div class="avatar">
+                  <div class="w-10 h-10 rounded-lg bg-warning/20 flex items-center justify-center">
+                    <span class="text-warning text-xs">🥥</span>
+                  </div>
+                </div>
+                <span class="text-sm font-medium">Coconut body oil</span>
+              </div>
+            </td>
+            <td class="text-sm">$75</td>
+            <td class="text-sm text-base-content/70">22 Jun 2024</td>
+            <td>
+              <span class="badge badge-warning badge-sm">On Going</span>
+            </td>
+            <td>
+              <div class="flex items-center gap-2">
+                <button class="btn btn-ghost btn-xs">
+                  <Eye size={14} />
+                </button>
+                <button class="btn btn-ghost btn-xs text-error">
+                  <Trash2 size={14} />
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr class="border-base-300 hover:bg-base-300/50">
+            <td>
+              <input type="checkbox" class="checkbox checkbox-sm" />
+            </td>
+            <td>
+              <div class="flex items-center gap-3">
+                <div class="avatar">
+                  <div class="w-10 h-10 rounded-lg bg-info/20 flex items-center justify-center">
+                    <span class="text-info text-xs">❄️</span>
+                  </div>
+                </div>
+                <span class="text-sm font-medium">Freeze Air</span>
+              </div>
+            </td>
+            <td class="text-sm">$47</td>
+            <td class="text-sm text-base-content/70">17 Jun 2024</td>
+            <td>
+              <span class="badge badge-info badge-sm">Confirmed</span>
+            </td>
+            <td>
+              <div class="flex items-center gap-2">
+                <button class="btn btn-ghost btn-xs">
+                  <Eye size={14} />
+                </button>
+                <button class="btn btn-ghost btn-xs text-error">
+                  <Trash2 size={14} />
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

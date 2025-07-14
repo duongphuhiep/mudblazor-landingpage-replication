@@ -1,0 +1,49 @@
+---
+import { Bell } from '@lucide/astro';
+---
+
+<div class='dropdown dropdown-start lg:dropdown-end'>
+    <div tabindex='0' role='button' class='indicator'>
+        <span class='indicator-item status status-info'></span>
+        <a class='tooltip tooltip-bottom' data-tip='Notifications'>
+            <Bell />
+        </a>
+    </div>
+
+    <div tabindex='0' class='dropdown-content z-1'>
+        <div class='list bg-base-100 rounded-box w-80 p-2 shadow-md inset-x-5'>
+            <li class='p-4 pb-2 text-xs opacity-60 tracking-wide'>
+                Notifications
+            </li>
+
+            <a class='list-row hover:bg-base-200 hover:cursor-pointer'>
+                <div>
+                    <div>v8: Riding the Momentum of v7</div>
+                    <div class='landing-text-c50'>
+                        <span>The MudBlazor Team</span>🔹<span
+                            >Jan 19, 2025</span
+                        >
+                    </div>
+                </div>
+            </a>
+            <a class='list-row hover:bg-base-200 hover:cursor-pointer'>
+                <div>
+                    <div>v7 Is Here!</div>
+                    <div class='landing-text-c50'>
+                        <span>The MudBlazor Team</span>🔹<span
+                            >Jun 29, 2024</span
+                        >
+                    </div>
+                </div>
+            </a>
+            <a class='list-row hover:bg-base-200 hover:cursor-pointer'>
+                <div>
+                    <div>MudBlazor is here to stay</div>
+                    <div class='landing-text-c50'>
+                        <span>Jonny Larsson</span>🔹<span>Jan 13, 2022</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

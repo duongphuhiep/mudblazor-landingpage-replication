@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+    --font-sans: "Public Sans", "Roboto", "Arial", "sans-serif";
+    --landing-text-opacity: 0.7;
+    --sample-app-scale: 0.7;
+}
+
+@layer components {
+    .landing-text {
+        @apply leading-8 text-[clamp(0.75rem,4vw,1.125rem)];
+    }
+
+    .landing-text-large {
+        @apply leading-10 text-[clamp(1rem,5vw,1.5rem)];
+    }
+
+    .landing-text-small {
+        @apply leading-6 text-[clamp(0.625rem,3vw,1rem)];
+    }
+
+    .landing-text-c50 {
+        opacity: var(--landing-text-opacity);
+    }
+
+    .btn-ripple {
+        position: relative; /* Needed for absolute positioning of the ripple */
+        overflow: hidden; /* Hides the ripple outside the button bounds */
+        transform: translate3d(0, 0, 0); /* Forces hardware acceleration */
+    }
+
+    .btn-ripple {
+        position: relative;
+        overflow: hidden;
+        transform: translate3d(0, 0, 0); /* Hardware acceleration */
+    }
+
+    .btn-ripple::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        //background: rgba(255, 255, 255, 0.2);
+        background: color-mix(
+            in srgb,
+            var(--color-base-content) 20%,
+            transparent
+        );
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease-out, height 0.6s ease-out;
+        pointer-events: none;
+    }
+
+    .btn-ripple:active::before {
+        width: 300px;
+        height: 300px;
+        transition: width 0.3s ease-out, height 0.3s ease-out;
+    }
+}

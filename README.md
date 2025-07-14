@@ -13,25 +13,25 @@ Each data retrieval is intentionally [delayed by 10 seconds](./DaisyMudDomain/Si
 
 ### Search dialog
 
-[Fake data retreival simulation](./DaisyMudDomain/SearchService.cs)
+[Fake data retreival simulation](./app/DaisyMudDomain/SearchService.cs)
 
  <img src="./docs/images/image-4.png" alt="search dialog" width="50%">
 
 ### Notification
 
-[Fake data retreival simulation](./DaisyMudDomain/NotificationService.cs)
+[Fake data retreival simulation](./app/DaisyMudDomain/NotificationService.cs)
 
 <img src="./docs/images/image-5.png" alt="notification" width="50%">
 
 ### Country list & Stats
 
-[Fake data retreival simulation](./DaisyMudDomain/CountryListService.cs)
+[Fake data retreival simulation](./app/DaisyMudDomain/CountryListService.cs)
 
 <img src="./docs/images/image-6.png" alt="stats" width="50%">
 
 ### Testimonial
 
-[Fake data retreival simulation](./DaisyMudDomain/TestimonialService.cs)
+[Fake data retreival simulation](./app/DaisyMudDomain/TestimonialService.cs)
 
 <img src="./docs/images/image-7.png" alt="testimonial" width="50%">
 
@@ -69,7 +69,7 @@ I discovered a small animation here last minute and added it to this replication
 
 This comparison highlights the significant performance gains of the optimized replication, even under less-than-ideal conditions
 
-The replication was run locally using `dotnet run` (without `--release`) and temporarily exposed via a [Cloudflare dev tunnel](https://developers.cloudflare.com/pages/how-to/preview-with-cloudflare-tunnel/) .  
+The replication was run locally using `dotnet run` (without `--release`) and temporarily exposed via a [Cloudflare dev tunnel](https://developers.cloudflare.com/pages/how-to/preview-with-cloudflare-tunnel/) .
 
 While these "Apple vs. Orange" comparisons are not strictly scientific, they provide a strong indication of the improved user-perceived performance.
 
@@ -95,16 +95,16 @@ My replication utilizes **Static Server rendering for most components**, switchi
 
 ### Server Data Display & Double Loading Mitigation
 
-To address the common "double loading" issue caused by pre-rendering, where data is fetched twice, LLMs often suggest disabling pre-rendering or using `PersistentComponentState`. And I opted for a third, more streamlined solution: combining `InteractiveServer` with an `OnAfterRender/firstRender` check.
+To address the common "double loading" issue caused by pre-rendering, where data is fetched twice, LLMs often suggest disabling pre-rendering or using [`PersistentComponentState`](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-9.0#handle-incomplete-asynchronous-actions-at-render). And I opted for a third, more streamlined solution: combining `InteractiveServer` with an `OnAfterRender/firstRender` check.
 
 ```razor
 @rendermode InteractiveServer
 
 @if (StatsData is null) {
-    <div class="skeleton">Display Loading spinner our a Skeleton place holder..</div>
-} 
+    <div class="skeleton">Display Loading spinner or A Skeleton place holder..</div>
+}
 else {
-    <div>@StatsData</div>    
+    <div>@StatsData</div>
 }
 
 @inject StatsService _statsService
@@ -119,7 +119,7 @@ else {
             if (StatsData is null)
             {
                 StatsData = await _statsService.GetStats(CancellationToken.None);
-                StateHasChanged();
+                StateHasChanged(); //data is ready, request rendering again
             }
         }
     }

@@ -1,0 +1,134 @@
+<link
+    rel='stylesheet'
+    href='https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/styles/github-dark.css'
+/>
+
+<style>
+    /* Styles for the typing animation */
+    .marker {
+        display: inline-block; /* Essential for width animation */
+        overflow: hidden; /* Hides content beyond the current width */
+        white-space: nowrap; /* Keeps content on a single line */
+        vertical-align: bottom;
+        interpolate-size: allow-keywords; /* Enable animation to/from intrinsic sizes */
+        border-right: 0.15em solid transparent; /* The blinking cursor */
+    }
+
+    .typing-animation1 {
+        animation: typing1 20s steps(266, end) forwards infinite;
+    }
+
+    .typing-animation2 {
+        animation: typing2 20s steps(266, end) forwards infinite;
+    }
+
+    /* Keyframes for the typing animation */
+    @keyframes typing1 {
+        0% {
+            /* 0s: start typing */
+            width: 0;
+            border-color: orange;
+        }
+        15% {
+            /* 3s: end typing */
+            width: max-content; /* Or a fixed width like 200px if not using max-content */
+        }
+        25% {
+            border-color: transparent;
+        }
+        100% {
+            width: max-content; /* Keep the width at its final state */
+        }
+    }
+
+    /* Keyframes for the typing animation */
+    @keyframes typing2 {
+        0% {
+            width: 0;
+        }
+        25% {
+            /*5s: start typing*/
+            width: 0; /* Or a fixed width like 200px if not using max-content */
+            border-color: orange;
+        }
+        30% {
+            /*6s end typing*/
+            width: max-content; /* Or a fixed width like 200px if not using max-content */
+        }
+        100% {
+            width: max-content; /* Keep the width at its final state */
+            border-color: transparent;
+        }
+    }
+
+    /* Optional: Hide the line initially until JS reveals it */
+    .marker {
+        width: 0;
+    }
+</style>
+
+<!--
+<button class='btn btn-accent' id='startAnimation'>Animation Start</button>
+<script type='module'>
+    import hljs from 'https://unpkg.com/@highlightjs/cdn-assets@11.11.1/es/highlight.min.js';
+    import xml from 'https://unpkg.com/@highlightjs/cdn-assets@11.11.1/es/languages/xml.min.js';
+    const rawCode = `<MudCard>
+    11111<MudCardMedia Image="painted-door.jpg" Height="200" />22222
+    <MudCardContent>
+        <MudText Typo="33333Typo.h522222">Old Paint</MudText>
+        <MudText Typo="Typo.body2">Old paint found on a stone house door.</MudText>
+        <MudText Typo="Typo.body2">This photo was taken in a small village in Istra Croatia.</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary">Share</MudButton>
+        <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+    </MudCardActions>
+</MudCard>
+    `;
+
+    hljs.registerLanguage('xml', xml);
+    const highlightedCode = hljs.highlight(rawCode, {
+        language: 'xml',
+    }).value;
+
+    const animatedHighlightedCode = highlightedCode
+        .replace('11111', '<span class="marker">')
+        .replaceAll('22222', '</span>')
+        .replace('33333', '<span class="marker animation-delay-5s">');
+
+    const pre = document.getElementById('mudcodesample');
+    const code = pre.querySelector('code');
+
+    code.innerHTML = animatedHighlightedCode;
+
+    const button = document.getElementById('startAnimation');
+    button.addEventListener('click', () => {
+        const allMarker1 = document.querySelectorAll('.marker');
+        allMarker1.forEach((el) => {
+            el.classList.remove('typing-animation');
+        });
+        requestAnimationFrame(() => {
+            allMarker1.forEach((el) => {
+                el.classList.add('typing-animation');
+                void el.offsetWidth;
+            });
+        });
+    });
+</script> -->
+
+<pre
+    id='mudcodesample'
+    class='w-full bg-[#0d1117] text-[#c9d1d9] overflow-auto'><code class="text-sm" />
+    <code class="text-sm"><span class="hljs-tag">&lt;<span class="hljs-name">MudCard</span>&gt;</span>
+        <span class="marker typing-animation1"><span class="hljs-tag">&lt;<span class="hljs-name">MudCardMedia</span> <span class="hljs-attr">Image</span>=<span class="hljs-string">"painted-door.jpg"</span> <span class="hljs-attr">Height</span>=<span class="hljs-string">"200"</span> /&gt;</span></span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">MudCardContent</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">MudText</span> <span class="hljs-attr">Typo</span>=<span class="hljs-string">"<span class="marker typing-animation2">Typo.h5</span>"</span>&gt;</span>Old Paint<span class="hljs-tag">&lt;/<span class="hljs-name">MudText</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">MudText</span> <span class="hljs-attr">Typo</span>=<span class="hljs-string">"Typo.body2"</span>&gt;</span>Old paint found on a stone house door.<span class="hljs-tag">&lt;/<span class="hljs-name">MudText</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">MudText</span> <span class="hljs-attr">Typo</span>=<span class="hljs-string">"Typo.body2"</span>&gt;</span>This photo was taken in a small village in Istra Croatia.<span class="hljs-tag">&lt;/<span class="hljs-name">MudText</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">MudCardContent</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">MudCardActions</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">MudButton</span> <span class="hljs-attr">Variant</span>=<span class="hljs-string">"Variant.Text"</span> <span class="hljs-attr">Color</span>=<span class="hljs-string">"Color.Primary"</span>&gt;</span>Share<span class="hljs-tag">&lt;/<span class="hljs-name">MudButton</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">MudButton</span> <span class="hljs-attr">Variant</span>=<span class="hljs-string">"Variant.Text"</span> <span class="hljs-attr">Color</span>=<span class="hljs-string">"Color.Primary"</span>&gt;</span>Learn More<span class="hljs-tag">&lt;/<span class="hljs-name">MudButton</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">MudCardActions</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">MudCard</span>&gt;</span></code>
+</pre>

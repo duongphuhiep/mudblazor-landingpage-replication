@@ -1,0 +1,68 @@
+<style>
+    .anim1 {
+        animation: showup1 20s steps(2, end) forwards infinite;
+        visibility: hidden;
+        opacity: 0;
+    }
+    @keyframes showup1 {
+        0% {
+            opacity: 0;
+            visibility: hidden;
+        }
+        15.99% {
+            opacity: 0;
+            visibility: hidden;
+        }
+        16% {
+            opacity: 1;
+            visibility: visible;
+        }
+        100% {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    .anim2 {
+        animation: showup2 20s steps(2, end) forwards infinite;
+        visibility: hidden;
+        opacity: 0;
+    }
+    @keyframes showup2 {
+        0% {
+            opacity: 0;
+            visibility: hidden;
+        }
+        30.99% {
+            opacity: 0;
+            visibility: hidden;
+        }
+        31% {
+            opacity: 1;
+            visibility: visible;
+        }
+        100% {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+</style>
+
+<div class='card shadow-sm'>
+    <figure class='anim1'>
+        <img src='https://www.mudblazor.com/images/door.jpg' alt='Door' />
+    </figure>
+    <div class='card-body'>
+        <h2 class='card-title anim2'>
+            Old Paint
+            <div class='badge badge-secondary'>NEW</div>
+        </h2>
+        <p>
+            Old paint found on a stone house door. This photo was taken in a
+            small village in Istra Croatia.
+        </p>
+        <div class='card-actions'>
+            <div class='btn btn-soft btn-primary'>Share</div>
+            <div class='btn btn-soft btn-primary'>Learn more</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+---
+import Logo from '../assets/mudblazor.svg';
+import MudIcon from '../assets/mud-icon.svg';
+import Gardnetab from '../assets/gardnetab.svg';
+import NavigationCursor from '../assets/navigation-cursor.svg';
+import Twitter from '../assets/twitter.svg';
+import Discord from '../assets/discord.svg';
+import Github from '../assets/github.svg';
+import StackOverflow from '../assets/stackoverflow.svg';
+---
+
+<style>
+    .landinglinks div div svg {
+        @apply fill-current inline-block;
+        width: 24px;
+        height: 24px;
+    }
+    .landinglinks h3 {
+        opacity: 1;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    .landinglinks div {
+        min-width: calc(var(--spacing) * 20);
+    }
+    .landinglinks div div {
+        opacity: var(--landing-text-opacity);
+        margin-bottom: 0.75rem;
+    }
+    .landinglinks > div:first-child > div:last-child > a:hover {
+        background-color: var(--color-primary);
+    }
+</style>
+<div class='mx-6'>
+    <div class='landinglinks flex flex-row flex-wrap justify-between gap-5'>
+        <div>
+            <h3 class='w-[40px]'><Logo /></h3>
+            <div>
+                <MudIcon class='me-3' />MudBlazor
+            </div>
+            <div>
+                <Gardnetab class='me-3' /> Gardnet AB
+            </div>
+            <div>
+                <NavigationCursor class='me-3' /> Sweden
+            </div>
+            <div class='flex flex-row'>
+                <a class='btn btn-circle'><Twitter /> </a>
+                <a class='btn btn-circle'><Discord /> </a>
+                <a class='btn btn-circle'><Github /> </a>
+                <a class='btn btn-circle'><StackOverflow /> </a>
+            </div>
+        </div>
+        <div>
+            <h3>Community</h3>
+            <div><a>Getting Help</a></div>
+            <div><a>Reporting Bugs</a></div>
+            <div><a>Contribute</a></div>
+            <div><a>Community Extensions</a></div>
+        </div>
+        <div>
+            <h3>Project</h3>
+            <div><a>Announcements</a></div>
+            <div><a>Releases</a></div>
+            <div><a>Roadmap</a></div>
+            <div><a>Sponsors & Backers</a></div>
+            <div><a>Team & Contributors</a></div>
+            <div><a>How it started</a></div>
+        </div>
+        <div>
+            <h3>Products & Legal Information</h3>
+            <div><a>MudBlazor</a></div>
+            <div><a>TryMudBlazor</a></div>
+            <div><a>ThemeManager</a></div>
+            <div><a>Templates</a></div>
+            <div><a>Cookie Policy</a></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+---
+import CodesIcon from '../assets/codes-icon.svg';
+import BoxIcon from '../assets/box-icon.svg';
+---
+
+<style>
+    .left-mark::before {
+        content: '';
+        position: absolute;
+        top: 0.3em;
+        left: -1rem;
+        width: 0.2rem;
+        height: 1em;
+        background-color: var(--color-primary);
+    }
+</style>
+
+<div class='grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-20 mx-6'>
+    <div>
+        <div>
+            <div class='text-2xl font-bold'>Ready to get started?</div>
+            <div class='landing-text landing-text-c50 mt-10'>
+                Ready to build amazing things? there are several ways to get
+                started. If you are new to web development or blazor in general,
+                the Getting Started section is a great place to start.
+            </div>
+        </div>
+        <button class='btn btn-primary mt-10'>Get started</button>
+    </div>
+
+    <div class='flex flex-col gap-8 md:flex-row landing-text-small min-w-0'>
+        <div class='flex flex-col gap-5'>
+            <div>
+                <CodesIcon class='fill-current' width='24' height='24' />
+            </div>
+            <div class='relative left-mark'>TryMudBlazor</div>
+            <div class='landing-text-c50'>
+                Test MudBlazor directly in your browser, no software or
+                installation needed.
+            </div>
+            <div class='link link-primary'>Test online</div>
+        </div>
+        <div class='flex flex-col gap-5'>
+            <div>
+                <BoxIcon class='fill-current' width='24' height='24' />
+            </div>
+            <div class='relative left-mark'>Templates</div>
+            <div class='landing-text-c50'>
+                Install our pre configured .NET Templates with MudBlazor.
+            </div>
+            <div class='link link-primary'>Explore templates</div>
+        </div>
+    </div>
+</div>

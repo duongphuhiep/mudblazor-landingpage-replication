@@ -1,0 +1,72 @@
+---
+import { Search } from '@lucide/astro';
+---
+
+<script is:inline>
+    function showModal5() {
+        console.info('showModal5 is called');
+        const dialog = document.getElementById('my_modal_5');
+        if (dialog) {
+            const searchInput = document.getElementById('searchInput');
+            dialog.showModal();
+            setTimeout(() => {
+                searchInput.focus();
+            }, 100);
+        } else {
+            console.warn('my_modal_5 dialog not found');
+        }
+    }
+</script>
+<dialog
+    id='my_modal_5'
+    class='modal modal-top scroll-0 [scrollbar-gutter:stable_both-edges]'>
+    <div class='modal-box max-w-md mx-auto'>
+        <label class='input input-primary input-lg w-full'>
+            <Search />
+            <input
+                type='search'
+                required
+                placeholder='Search'
+                id='searchInput'
+            />
+        </label>
+        <div class='max-h-79 overflow-y-scroll list'>
+            <a href='google.com' class='list-row hover:bg-base-200'>
+                <div class='landing-text-small'>Installation</div>
+                <div class='landing-text-c50 list-col-wrap text-xs'>
+                    Lorem ipsum dolor sit amet consectetur adipisicing edivt.
+                </div>
+            </a>
+            <a href='google.com' class='list-row hover:bg-base-200'>
+                <div class='landing-text-small'>Wireframes</div>
+                <div class='landing-text-c50 list-col-wrap text-xs'>
+                    Amet deserunt nostrud do moldivt consequat proident ipsum
+                    magna incididunt.
+                </div>
+            </a>
+            <a href='google.com' class='list-row hover:bg-base-200'>
+                <div class='landing-text-small'>Table</div>
+                <div class='landing-text-c50 list-col-wrap text-xs'>
+                    Sit sit excepteur aute culpa nulla incididunt fugiat dolore
+                    nisi et consectetur labore fugiat commodo.
+                </div>
+            </a>
+            <a href='google.com' class='list-row hover:bg-base-200'>
+                <div class='landing-text-small'>Grid</div>
+                <div class='landing-text-c50 list-col-wrap text-xs'>
+                    Incididunt commodo pariatur excepteur consequat id. Lorem
+                    ipsum dolor sit amet consectetur adipisicing edivt. Esse
+                    molestias soluta quisquam nam labore odio tempore numquam
+                    repellat quod, sed, ipsa cum dolorum. Dicta optio simidivque
+                    obcaecati quaerat deleniti divbero?
+                </div>
+            </a>
+        </div>
+        <div class='opacity-20 text-xs mt-2 float-end'>
+            Press ESC key or click outside to close
+        </div>
+    </div>
+    <form method='dialog' class='modal-backdrop'>
+        <button></button>
+    </form>
+</dialog>

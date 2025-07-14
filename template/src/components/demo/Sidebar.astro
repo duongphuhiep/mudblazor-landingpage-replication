@@ -1,0 +1,195 @@
+---
+import {
+    ShoppingCart,
+    Users,
+    Brain,
+    FileText,
+    MessageSquare,
+    Settings,
+    HelpCircle,
+    ExternalLink,
+    Tag,
+} from '@lucide/astro';
+---
+
+<div class='drawer-side'>
+    <label for='drawer-toggle' class='drawer-overlay'></label>
+    <aside class='bg-base-200 text-base-content min-h-full w-80 p-4'>
+        <!-- Logo -->
+        <div class='flex items-center gap-2 p-4 border-b border-base-300'>
+            <div
+                class='w-8 h-8 bg-primary rounded-lg flex items-center justify-center'>
+                <span class='text-primary-content font-bold text-sm'>N</span>
+            </div>
+            <span class='text-xl font-bold'>Nexus</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class='p-4'>
+            <div class='space-y-2'>
+                <!-- Dashboard Section -->
+                <div class='collapse collapse-open'>
+                    <div
+                        class='collapse-title text-sm font-medium text-base-content/70 px-0 py-2'>
+                        Dashboard
+                    </div>
+                    <div class='collapse-content px-0'>
+                        <ul class='space-y-1'>
+                            <li>
+                                <a
+                                    href='/'
+                                    class='flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-primary-content'>
+                                    <ShoppingCart size={16} />
+                                    <span class='text-sm'>Ecommerce</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href='/'
+                                    class='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-300 transition-colors'>
+                                    <Users size={16} />
+                                    <span class='text-sm'>CRM</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href='/'
+                                    class='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-300 transition-colors'>
+                                    <Brain size={16} />
+                                    <span class='text-sm'>Gen AI</span>
+                                    <span class='badge badge-primary badge-sm'
+                                        >New</span
+                                    >
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apps Section -->
+                <div class='pt-4'>
+                    <h3
+                        class='text-sm font-medium text-base-content/70 px-3 py-2'>
+                        Apps
+                    </h3>
+                    <ul class='space-y-1'>
+                        <li>
+                            <a
+                                href='/'
+                                class='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-300 transition-colors'>
+                                <ShoppingCart size={16} />
+                                <span class='text-sm'>Ecommerce</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href='/'
+                                class='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-300 transition-colors'>
+                                <Brain size={16} />
+                                <span class='text-sm'>Gen AI</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href='/'
+                                class='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-300 transition-colors'>
+                                <FileText size={16} />
+                                <span class='text-sm'>File Manager</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href='/'
+                                class='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-300 transition-colors'>
+                                <MessageSquare size={16} />
+                                <span class='text-sm'>Chat</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pages Section -->
+                <div class='pt-4'>
+                    <h3
+                        class='text-sm font-medium text-base-content/70 px-3 py-2'>
+                        Pages
+                    </h3>
+                    <ul class='space-y-1'>
+                        <li>
+                            <a
+                                href='/'
+                                class='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-300 transition-colors'>
+                                <ExternalLink size={16} />
+                                <span class='text-sm'>Landing</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href='/'
+                                class='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-300 transition-colors'>
+                                <Users size={16} />
+                                <span class='text-sm'>Auth</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Other Section -->
+                <div class='pt-4'>
+                    <h3
+                        class='text-sm font-medium text-base-content/70 px-3 py-2'>
+                        Other
+                    </h3>
+                    <ul class='space-y-1'>
+                        <li>
+                            <a
+                                href='/'
+                                class='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-300 transition-colors'>
+                                <Tag size={16} />
+                                <span class='text-sm'>Label</span>
+                                <span class='badge badge-secondary badge-sm'
+                                    >98</span
+                                >
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href='/'
+                                class='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-300 transition-colors'>
+                                <Settings size={16} />
+                                <span class='text-sm'>Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href='/'
+                                class='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-base-300 transition-colors'>
+                                <HelpCircle size={16} />
+                                <span class='text-sm'>Get Help</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- User Profile -->
+        <div
+            class='absolute bottom-0 left-0 right-0 p-4 border-t border-base-300'>
+            <div class='flex items-center gap-3'>
+                <div class='avatar'>
+                    <div class='w-8 h-8 rounded-full bg-primary'>
+                        <span
+                            class='text-primary-content text-sm font-medium flex items-center justify-center w-full h-full'
+                            >DN</span
+                        >
+                    </div>
+                </div>
+                <div class='flex-1'>
+                    <div class='text-sm font-medium'>Danish N</div>
+                    <div class='text-xs text-base-content/70'>@withdon</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>

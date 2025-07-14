@@ -1,0 +1,14 @@
+---
+import { ArrowRightLeft } from '@lucide/astro';
+
+const buttonId = `change-dir-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<button id={buttonId}>
+    <ArrowRightLeft />
+</button>
+<script define:vars={{ buttonId }}>
+    document.getElementById(buttonId)?.addEventListener('click', () => {
+        document.dir = document.dir === 'rtl' ? 'ltr' : 'rtl';
+    });
+</script>
